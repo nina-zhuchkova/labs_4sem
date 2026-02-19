@@ -1,0 +1,81 @@
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[main = russian, english]{babel}	% локализация и переносы
+%\selectlanguage{english} (для англостатей)
+%\usepackage{caption}
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma}
+\usepackage{physics}
+\usepackage{multicol}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\usepackage{verbatim}
+
+%%% Номера формул
+%\mathtoolsset{showonlyrefs=true} 
+%\usepackage{leqno} 
+
+%%% Свои команды
+\DeclareMathOperator{\sgn}{sgn}
+
+\usepackage{csquotes} 
+\usepackage[backend=biber,style=authoryear]{biblatex}
+
+
+%%% Работа с графикой
+\usepackage{graphicx}
+\graphicspath{{images/}}  
+\setlength\fboxsep{3pt} 
+\setlength\fboxrule{1pt} 
+\usepackage{wrapfig} 
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{polar}
+\pgfplotsset{compat=1.18} 
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs}
+\usepackage{longtable}  
+\usepackage{multirow} 
+\usepackage{soul} 
+
+%%% Теоремы
+\theoremstyle{plain} 
+\newtheorem{theorem}{Th}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{question}{Question}[section]
+ 
+\theoremstyle{definition} 
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{problem}{Problem}[section]
+\newtheorem{definition}{Def}[section]
+ 
+\theoremstyle{remark} 
+\newtheorem*{nonum}{Solution}
+
+%%% Программирование
+\usepackage{etoolbox} 
+
+%%% Гиперссылки
+\usepackage{hyperref}
+
+\usetikzlibrary{knots}
+\usepackage{tcolorbox}
+
+%%% Страница
+\usepackage{geometry} 
+	\geometry{top=20mm, bottom=20mm, left=15mm, right=20mm}
+
+\usepackage{setspace} 
+
+\usepackage{lastpage} 
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage[all]{xy}
+\usepackage{dsfont}
