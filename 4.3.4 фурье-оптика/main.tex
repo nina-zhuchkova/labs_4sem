@@ -11,21 +11,152 @@
 
 \begin{document}
 \input{../title.tex}
-\textbf{Цель:} исследование особенностей применения пространственного преобразования Фурье для анализа дифракционных явлений.
+\begin{center}
+    Принципы Фурье-оптики обеспечивают продуктивный способ анализа дифракционных картин. В данной работе дано краткое теоретическое введение к методу. С его помощью получен вид дифракции Фраунгофера для щели и дифракционной решетки, световое поле в фокальной плоскости линзы, период мультиприцирования для системы Линза-Решетка. Полученные формулы применены на эксперименте для измерения ширины щели и периода дифракционной сетки; проверена формула для периода мультипликации.  
+\end{center}
 
-\textbf{В работе используется:} гелий-неоновый лазер, кассета с набором сеток разного периода, щель с микрометрическим винтом, линзы,
-экран, линейка.
+\tableofcontents
+\section{Введение}
+
+\newpage
 
 \section{Теоретические сведения}
-\section{Определение ширины щели}
-\subsection{ Определение ширины щели по увеличенному изображению}
+\subsection{Спектральный метод решения задачи дифракции}
+\label{sec:spectr}
+Рассмотрим двумерную краевую задачу: известно световое поле $f_0(x)$ в плоскости z = 0, поле в полупространстве $z \ge 0$ задается уравнением Гельмгольца $\nabla^2 f + k^2 f = 0$, где $k = \frac{2\pi}{\lambda}$ -- пространственная частота распространяющейся волны. Тогда решение, то есть световое поле в полупространстве $z \ge 0$, выражается через интеграл Фурье:
+
+\begin{equation}
+    f(x, z) = \int C_0(u) e^{i\sqrt{k^2 - u^2}} e^{i u x} du , 
+\end{equation}
+
+где $C_0(u) = \frac{1}{2\pi} \int f_0(x) e^{-i u x} dx$ -- спектр краевого поля. В пределе $z \gg x$ метод перевала дает:
+
+\begin{equation}
+    f(x, z \to\infty) \propto e^{i \phi(x, z)} \frac{1}{\sqrt{z \lambda}} C_0\left(k\frac{x}{z}\right) , 
+    \label{eq:spectrum}
+\end{equation}
+где $\phi(x, z) = k\frac{x^2}{2z}$ -- фаза поля. Таким образом интенсивность изображения на маленьком удаленном экране зависит от координаты $x$ как квадрат спектра краевого поля $f_0(x)$.
+
+\subsubsection{Спектр вертикальной щели}
+
+При нормальном падении плоской волны краевое поле справа от вертикальной $|| y$ щели шириной $D$ имеет вид $f_{0, slit}(x) = I(|x| < D/2)$, где $I$ -- индикаторная функция (см. рис. \ref{fig:slit_f0}). Его спектр (см. рис. \ref{fig:slit_spectrum}):
+
+\begin{equation}
+    C_{0, slit}(u) = \frac{D}{2\pi} \frac{\sin \frac{D}{2}u}{\frac{D}{2}u}
+\end{equation}
+
+Соответственно, согласно \eqref{eq:spectrum}, на удаленном от щели на расстояние $L$ экране будет наблюдаться интерференционная картина, минимумы интенсивности которой соответствуют нулям $\sin \frac{D}{2} k \frac{x}{L}$. Тогда:
+
+\begin{equation}
+    \boxed{X = m \frac{\lambda}{D} L ~~~~ \text{\parbox{9cm}{-- расстояние от центра интерференционной картины до минимума порядка m}}}
+\end{equation}
+
+\begin{figure}[h]
+    \centering
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[height=3 cm]{pics/функция пропускания щели.png} 
+\caption{Функция пропускания щели}
+\label{fig:slit_f0}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[height=3 cm]{pics/спектр щели график.png}
+\caption{Спектр функции пропускания щели}
+\label{fig:slit_spectrum}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[height=3 cm]{pics/спектр щели график.png}
+\caption{Наблюдаемая интенсивность $\propto C_0^2(u)$ ($\sin \theta \equiv \frac{u}{k}$)}
+\label{fig:slit_intensity}
+\end{subfigure}
+\caption{}
+\end{figure}
+
+\subsubsection{Спектр дифракционной решетки}
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{pics/grid_spectrum.png}
+  \end{center}
+  \caption{Наблюдаемая интенсивность после прохождения дифракционной решетки с $N = 5$ щелями и скважностью $D/d = 1/5$ ($\sin \theta \equiv \frac{u}{k}$, $g(\theta) \equiv C_{0, slit}(\theta)$)}
+  \label{fig:grid_intensity}
+\end{wrapfigure}
+
+При нормальном падении плоской волны краевое поле на выходе из вертикальной $|| y$ дифракционной решетки с $N = 2n + 1$ щелями ширины $D$ и периодом $d$ имеет вид $f_{0, grid}(x) = I(|x - id| < D/2, i \in -n, ..., -1, 0, 1, ... n)$. Его спектр:
+
+\begin{equation}
+    C_{0, grid}(u) = C_{0, slit}(u) \cdot \frac{\sin \frac{Nkd}{2} u}{\sin \frac{kd}{2} u}
+\end{equation}
+
+Максимумы интерсивности, наблюдаемой на удаленном от решетки на расстояние $L$ экране, согласно \eqref{eq:spectrum}, тогда располагаются примерно в точках обнуления $\sin \frac{kd}{2} \frac{x}{L}$ (см. рис. \ref{fig:grid_intensity}). То есть:
+
+\begin{equation}
+    \boxed{\Delta x = \frac{\lambda}{D} L ~~~~ \text{\parbox{9cm}{-- расстояние между соседними максимумами интерференции}}}
+    \label{eq:grid_dist}
+\end{equation}
+
+\subsubsection{Спектр дифракционной сетки}
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+  \begin{center}
+    \includegraphics[width=0.25 \textwidth]{pics/спектр сетки.png}
+  \end{center}
+  \caption{Спектр дифракционной сетки}
+  \label{fig:mesh_intensity}
+\end{wrapfigure}
+
+Спектр двумерной сетки с функцией пропускания $f_{0, mesh}(x, y) = f_{0, grid}(x) \cdot f_{0, grid}(x)$ имеет вид $C_{0, mesh} (u_x, u_y) = C_{0, grid}(u_x) \cdot C_{0, grid}(u_y)$. Следовательно, двумерный спектр на удаленном экране имеет вид сетки (см. рис. \ref{fig:mesh_intensity}), а горизонтальные и вертикальные расстояния между максимумами интенсивности определяются по формуле \eqref{eq:grid_dist}.
+
+\subsection{Принцип формирования оптического изображения}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=0.45 \textwidth]{pics/abbe_meth.jpg}
+  \end{center}
+  \caption{Формирование изображения в плоской линзе}
+  \label{fig:abbe_meth}
+\end{wrapfigure}
+
+Пусть известно световое поле $f_0(x)$ на расстоянии $a$ от плоской линзы с фокусным расстоянием $F$ (см. рис. \ref{fig:abbe_meth}). Тогда поле в фокальной плоскости линзы равно:
+
+\begin{equation}
+    f(x, F) = e^{i\psi(x, a)} \cdot C_0(k\frac{x}{F})
+\end{equation}
+, где $\psi(x, a) = -\frac{k}{2 F^2}(a - F)x^2$. 
+
+Световое поле на экране, расположенном на расстоянии $b$ от линзы, теперь можно найти, воспользовавшись методом, описанным в разделе \ref{sec:spectr}. При условии $\phi(x, b - F) + \psi(x, a) = 0$ (то есть при выполнении формулы тонкой линзы $(a - F)(b - F) = F^2$) световое поле на экране равно:
+
+\begin{equation}
+    f(x, b = \frac{aF}{a - F}) = f_0(- \frac{b}{a} x),
+\end{equation}
+то есть формируется четкое изображение предмета.
+
+\subsection{Мультиплицирование}
+
+Если расположить в фокальной плоскости линзы дифракционную решетку периодом $d$ (см. рис. \ref{fig:C_setup}), то от всего спектра светового поля предмета остается только дискретный набор частот $u_n = 2\pi \frac{d}{\lambda F} n$. Таким образом решетка "заменяет" исходное световое поле $f_0$ на ряд:
+
+\begin{equation}
+    \tilde{f_0(x)} \propto \sum С_0(u_n) e^{i u_n x}
+\end{equation}
+, то есть "отфильтрованное" решеткой изображение получается из исходного его повторением с периодом $\boxed{d_0 = \frac{\lambda F}{d} \Gamma}$, где $\Gamma = \frac{b}{a}$ -- увеличение линзы.
+
+
+\section{Определение ширины щели методами геометричекой и фурье-оптики}
+
+\subsection{ Определение ширины щели по ее увеличенному изображению}
 
 Первый метод измерения ширины щели заключался в измерении ширины ее увеличенного при помощи короткофокусной линзы изображения (см. рис. \ref{fig:A1_setup}).
 \begin{figure}[h]
-    \centering
-    \includegraphics[width = 0.9\textwidth]{pics/A1_setup.jpg}
-    \caption{Схема для определения ширины щели с помощью линзы}
-    \label{fig:A1_setup}
+    \begin{subfigure}{0.75\textwidth}
+        \centering
+\includegraphics[width=0.9\linewidth]{pics/A1_setup.jpg} 
+\caption{Схема установки}
+\label{fig:A1_setup}
+    \end{subfigure}
+    \begin{subfigure}{0.2\textwidth}
+\includegraphics[width=0.9\linewidth]{pics/A1_negative.jpg}
+\caption{Изображене щели на экране (негатив)}
+\label{fig:A1_negative}
+\end{subfigure}
+\caption{Определения ширины щели с помощью линзы}
 \end{figure}
 
 При измерениях расстояние от щели до экрана было равно $L \equiv a_1 + b_1 = (136 \pm 0.5)$ см, а расстояние от линзы до экрана $b_1 = (131 \pm 0.5)$ см. Увеличение может быть посчитано двумя способами:
@@ -41,6 +172,30 @@
 \input{tables/A1.tex}
 
 \subsection{Определение ширины щели по ее спектру}
+
+\textcolor{red}{В этой части работы вместо максимумов }
+Второй способ определения ширины щели опирается на дифракцию Фраунгофера. 
+
+\subsection{Сравнение двух методов}
+\begin{figure}[h]
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=0.9\linewidth]{pics/A_plot.png}
+\label{fig:A_plot}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=0.9\linewidth]{pics/A2_plot.png}
+\label{fig:A2_plot}
+\end{subfigure}
+\caption{Расчет ширины щели по:\\ (1) ее увеличенному изображению \\ (2) ее спектру}
+\end{figure}
+
+\subsection{Измерение толщины волоса}
+
+$D_\text{волоса} = (53 \pm 2)$ мкм 
+
+\section{Определение периода рашеток}
+\subsection{Определение периода решеток по по спектру на удалённом экране}
+\subsection{Определение периода решёток по увеличенному изображению спектра}
 
 
 \end{document}
