@@ -23,8 +23,16 @@
 %%% Свои команды
 \DeclareMathOperator{\sgn}{sgn}
 
+% Библиография
 \usepackage{csquotes} 
-\usepackage[backend=biber,style=authoryear]{biblatex}
+\usepackage[
+    backend=biber,
+    style=numeric,
+    sorting=none,
+    autolang=other,           
+    language=auto,            
+    clearlang=true,           
+]{biblatex}
 
 
 %%% Работа с графикой
